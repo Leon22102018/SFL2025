@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0;" />
+  <title>homepage9</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background-color: #f4f4f4;
+      overflow-x: hidden;
+    }
+    
+    .header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      text-align: center;
+      padding: 2rem 0;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    .header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+    
+    .header h2 {
+      font-size: 1.2rem;
+      font-weight: 300;
+      opacity: 0.9;
+    }
+    
+    main {
+      max-width: 100vw;
+      margin: 2rem 0;
+      padding: 0;
+    }
+    
+    /* Navigation Container */
+    .nav-container {
+      position: relative;
+      width: 100vw;
+      height: 80vh;
+      overflow: hidden;
+    }
+    
+    .nav-wrapper {
+      display: flex;
+      width: 500vw; /* 5 Spalten × 100vw */
+      height: 100%;
+      transition: transform 0.3s ease-out;
+      touch-action: pan-x;
+    }
+    
+    .column {
+      width: 100vw;
+      height: 100%;
+      background: white;
+      display: flex;
+      flex-direction: column;
+      border-right: 1px solid #e2e8f0;
+      overflow-y: auto;
+    }
+    
+    .column-header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 1.5rem;
+      text-align: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    
+    .column-header h3 {
+      font-size: 1.2rem;
+      margin: 0;
+    }
+    
+    /* Tab Navigation */
+    .tab-navigation {
+      display: flex;
+      background: #f8f9fa;
+      border-bottom: 2px solid #e2e8f0;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    
+    .tab-navigation::-webkit-scrollbar {
+      display: none;
+    }
+    
+    .tab-btn {
+      flex: 0 0 auto;
+      padding: 1rem 1.5rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #666;
+      border-bottom: 3px solid transparent;
+      transition: all 0.3s ease;
+      white-space: nowrap;
+      min-width: 80px;
+    }
+    
+    .tab-btn:hover {
+      color: #667eea;
+      background-color: #f0f4ff;
+    }
+    
+    .tab-btn.active {
+      color: #667eea;
+      border-bottom-color: #667eea;
+      background-color: #f0f4ff;
+    }
+    
+    /* Tab Content */
+    .tab-content {
+      flex: 1;
+      padding: 1.5rem;
+      display: none;
+    }
+    
+    .tab-content.active {
+      display: block;
+    }
+    
+    .tab-item {
+      display: block;
+      padding: 1rem;
+      color: #666;
+      text-decoration: none;
+      border-bottom: 1px solid #f0f0f0;
+      transition: all 0.2s ease;
+      border-radius: 6px;
+      margin-bottom: 0.5rem;
+    }
+    
+    .tab-item:hover {
+      color: #667eea;
+      background-color: #f8f9ff;
+      transform: translateX(5px);
+    }
+    
+    /* Page Indicators */
+    .page-indicators {
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 0.5rem;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      z-index: 1000;
+    }
+    
+    .indicator {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #cbd5e0;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .indicator.active {
+      background: #667eea;
+      transform: scale(1.2);
+    }
+    
+    /* Swipe Instructions */
+    .swipe-hint {
+      position: fixed;
+      top: 50%;
+      right: 2rem;
+      transform: translateY(-50%);
+      background: rgba(102, 126, 234, 0.9);
+      color: white;
+      padding: 1rem;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+      z-index: 1000;
+      animation: slideInRight 0.5s ease-out;
+    }
+    
+    @keyframes slideInRight {
+      from {
+        opacity: 0;
+        transform: translateY(-50%) translateX(100%);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(-50%) translateX(0);
+      }
+    }
+    
+    /* Mobile Optimizations */
+    @media (max-width: 768px) {
+      .header h1 {
+        font-size: 1.8rem;
+      }
+      
+      .column-header h3 {
+        font-size: 1rem;
+      }
+      
+      .tab-btn {
+        padding: 0.8rem 1rem;
+        font-size: 0.8rem;
+        min-width: 60px;
+      }
+      
+      .tab-content {
+        padding: 1rem;
+      }
+      
+      .swipe-hint {
+        right: 1rem;
+        font-size: 0.8rem;
+        padding: 0.8rem;
+      }
+    }
+    
+    /* Touch feedback */
+    .nav-wrapper.dragging {
+      transition: none;
+    }
+    
+    .column.touching {
+      background: #f8f9ff;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>Sprachen bauen Brücken</h1>
+    <h2>Dr. Karl-Heinz Eggensperger</h2>
+  </div>
+
+  <main>
+    <div class="nav-container">
+      <div class="nav-wrapper" id="navWrapper">
+        
+        <!-- Spalte 1: Studienbezogenes Fremdsprachenlernen -->
+        <div class="column">
+          <div class="column-header">
+            <h3>Studienbezogenes Fremdsprachenlernen (SFL)</h3>
+          </div>
+          <div class="tab-navigation">
+            <button class="tab-btn active" onclick="showTab(0, 0)">Grundlagen</button>
+            <button class="tab-btn" onclick="showTab(0, 1)">Didaktik</button>
+            <button class="tab-btn" onclick="showTab(0, 2)">Curriculum</button>
+            <button class="tab-btn" onclick="showTab(0, 3)">Lernziele</button>
+            <button class="tab-btn" onclick="showTab(0, 4)">Wissen</button>
+            <button class="tab-btn" onclick="showTab(0, 5)">Prozesse</button>
+            <button class="tab-btn" onclick="showTab(0, 6)">Aktivitäten</button>
+            <button class="tab-btn" onclick="showTab(0, 7)">Wirkung</button>
+            <button class="tab-btn" onclick="showTab(0, 8)">Evaluation</button>
+          </div>
+          <div class="tab-content active">
+            <a href="#" class="tab-item">Fremdsprachenunterricht im Hochschulkontext</a>
+            <a href="#" class="tab-item">Theoretische Grundlagen SFL</a>
+            <a href="#" class="tab-item">Konzeptionelle Ansätze</a>
+            <a href="#" class="tab-item">Methodische Prinzipien</a>
+          </div>
+          <div class="tab-content">
+            <a href="#" class="tab-item">Didaktische Theoriebildung SFL</a>
+            <a href="#" class="tab-item">Lehr-Lern-Konzepte</a>
+            <a href="#" class="tab-item">Methodische Innovationen</a>
+            <a href="#" class="tab-item">Unterrichtsgestaltung</a>
+          </div>
+          <div class="tab-content">
+            <a href="#" class="tab-item">Forschung curriculare Determinanten</a>
+            <a href="#" class="tab-item">Curriculumsentwicklung</a>
+            <a href="#" class="tab-item">Studiengang-Integration</a>
+            <a href="#" class="tab-item">Modulkonzepte</a>
+          </div>
+          <div class="tab-content">
+            <a href="#" class="tab-item">Lernzielforschung</a>
+            <a href="#" class="tab-item">Kompetenzorientierung</a>
+            <a href="#" class="tab-item">Lernergebnisse</a>
+            <a href="#" class="tab-item">Assessment</a>
+          </div>
+          <div class="tab-content">
+            <a href="#" class="tab-item">Forschung studienrelevantes Wissen</a>
+            <a href="#" class="tab-item">Fachsprachliche Kompetenzen</a>
+            <a href="#" class="tab-item">Transferleistungen</a>
+            <a href="#" class="tab-item">Anwendungsbezug</a>
+          </div>
+          <div class="tab-content">
+            <a href="#" class="tab-item">Forschung Lernprozesse - Wissensverarbeitung</a>
+            <a href="#" class="tab-item">Kognitive Strategien</a>
+            <a href="#" class="tab-item">Lernstile</a>
+            <a href="#" class="tab-item">Informationsverarbeitung</a>
+          </div>
+          <div class="tab-content">
+            <a href="#" class="tab-item">Forschung Lernaktivitäten</a>
+            <a href="#" class="tab-item">Selbstgesteuertes Lernen</a>
+            <a href="#" class="tab-item">Kollaboratives Lernen</a>
+            <a href="#" class="tab-item">Projektbasiertes Lernen</a>
+          </div>
+          <div class="tab-content">
+            <a href="#" class="tab-item">Wirkungsforschung</a>
+            <a href="#" class="tab-item">Lernerfolg</a>
+            <a href="#" class="tab-item">Langzeiteffekte</a>
+            <a href="#" class="tab-item">Qualitätssicherung</a>
+          </div>
+          <div class="tab-content">
+            <a href="#" class="tab-item">Evaluation und Bewertung</a>
+            <a href="#" class="tab-item">Feedback-Systeme</a>
+            <a href="#" class="tab-item">Verbesserungsmaßnahmen</a>
+            <a href="#" class="tab-item">Qualitätsmanagement</a>
+          </div>
+        </div>
+
+        <!-- Spalte 2: Deutsches und Französisches Recht -->
+        <div class="column">
+          <div class="column-header">
+            <h3>Deutsches und Französisches Recht</h3>
+          </div>
+          <div class="tab-navigation">
+            <button class="tab-btn active" onclick="showTab(1, 0)">Vorbereitung</button>
+            <button class="tab-btn" onclick="showTab(1, 1)">Grundlagen</button>
+            <button class="tab-btn" onclick="showTab(1, 2)">Verfassung</button>
+            <button class="tab-btn" onclick="showTab(1, 3)">Verwaltung</button>
+            <button class="tab-btn" onclick="showTab(1, 4)">Familie</button>
+            <button class="tab-btn" onclick="showTab(1, 5)">Schuldrecht</button>
+            <button class="tab-btn" onclick="showTab(1, 6)">Sachenrecht</button>
+            <button class="tab-btn" onclick="showTab(1, 7)">Methodik</button>
+            <button class="tab-btn" onclick="showTab(1, 8)">Prüfung</button>
+          </div>
+          <div class="tab-content active">
+            <a href="#" class="tab-item">Brückenkurs - Stage de prérentrée</a>
+            <a href="#" class="tab-item">Sprachliche Vorbereitung</a>
+            <a href="#" class="tab-item">Kulturelle Einführung</a>
+            <a href="#" class="tab-item">Rechtssysteme im Vergleich</a>
+          </div>
+          <div class="tab-content">
+            <a href="#" class="tab-item">Introduction au droit</a>
+            <a href="#" class="tab-item">Histoire sociale</a>
+            <a href="#" class="tab-item">Grundbegriffe des Rechts</a>
+            <a href="#" class="tab-item">Rechtsquellen</a>
+          </div>
+          <div class="tab-content">
+            <a href="#" class="tab-item">Droit constitutionnel</a>
+            <a href="#" class="tab-item">Staatsorganisation</a>
+            <a href="#" class="tab-item">Grundrechte</a>
+            <a href="#" class="tab-item">Verfassungsgerichtsbarkeit</a>
+          </div>
+          <div class="tab-content">
+            <a href="#" class="tab-item">Droit administratif</a>
+            <a href="#" class="tab-item">Verwaltungsverfahren</a>
+            <a href="#" class="tab-item">Verwaltungsakt</a>
+            <a href="#" class="tab-item">Rechtsschutz</a>
+          </div>
+          <div class="tab-content">
+            <a href="#" class="tab-item">Droit de la famille</a>
+            <a href="#" class="tab-item">Ehe und Partnerschaft</a>
+            <a href="#" class="tab-item">Kindschaftsrecht</a>
+            <a href="#" class="tab-item">Erbrecht</a>
+          </div>
+          <div class="tab-content">
+            <a href="#" class="tab-item">Droit des obligations I</a>
+            <a href="#" class="tab-item">Droit des obligations II</a>
+            <a href="#" class="tab-item">Vertragsrecht</a>
+            <a href="#" class="tab-item">Deliktsrecht</a>
+          </div>
+          <div class="tab-content">
+            <a href="#" class="tab-item">Droit des biens</a>
+            <a href="#" class="tab-item">Eigentumsrecht</a>
+            <a href="#" class="tab-item">Besitzrecht</a>
+            <a href="#" class="tab-item">Sicherungsrechte</a>
+          </div>
+          <div class="tab-content">
+            <a href="#" class="tab-item">Introduction à la méthode</a>
+            <a href="#" class="tab-item">Falllösungstechnik</a>
+            <a href="#" class="tab-item">Rechtsmethodologie</a>
+            <a href="#" class="tab-item">Argumentation</a>
+          </div>
+          <div class="tab-content">
+            <a href="#" class="tab-item">Épreuves modèles</a>
+            <a href="#" class="tab-item">Klausurtechnik</a>
+            <a href="#" class="tab-item">Prüfungsvorbereitung</a>
+            <a href="#" class="tab-item">Bewertungskriterien</a>
+          </div>
+        </div>
+
+        <!-- Spalte 3: Fremdsprachenunterricht -->
+        <div class="column">
+          <div class="column-header">
+            <h3>Fremdsprachenunterricht</h3>
+          </div>
+          <div class="tab-navigation">
+            <button class="tab-btn active" onclick="showTab(2, 0)">Englisch</button>
+            <button class="tab-btn" onclick="showTab(2, 1)">Französisch</button>
+            <button class="tab-btn" onclick="showTab(2, 2)">Spanisch</button>
+            <button class="tab-btn" onclick="showTab(2, 3)">Italienisch</button>
+            <button class="tab-btn" onclick="showTab(2, 4)">Deutsch</button>
+            <button class="tab-btn" onclick="showTab(2, 5)">Russisch</button>
+            <button class="tab-btn" onclick="showTab(2, 6)">Chinesisch</button>
+            <button class="tab-btn" onclick="showTab(2, 7)">Arabisch</button>
+            <button class="tab-btn" onclick="showTab(2, 8)">Weitere</button>
+          </div>
+          <div class="tab-content active">
+            <a href="#" class="tab-item">Business English</a>
+            <a href="#" class="tab-item">Academic English</a>
+            <a href="#" class="tab-item">Legal English</a>
+            <a href="#" class="tab-item">Technical English</a>
+          </div>
+          <div class="tab-content">
+            <a href="#" class="tab-item">Français des affaires</a>
+            <a href="#" class="tab-item">Français juridique</a>
+            <a href="#" class="tab-item">Français académique</a>
+            <a href="#" class="tab-item">Français technique</a>
+          </div>
+          <div class="tab-content">
+            <a href="#" class="tab-item">Español comercial</a>
+            <a href="#" class="tab-item">Español jurídico</a>
+            <a href="#" class="tab-item">Español académico</a>
+            <a href="#" class="tab-item">Español técnico</a>
+          </div>
+          <div class="tab-content">
+            <a href="#" class="tab-item">Italiano commerciale</a>
+            <a href="#" class="tab-item">Italiano giuridico</a>
+            <a href="#" class="tab-item">Italiano accademico</a>
+            <a href="#" class="tab-item">Italiano tecnico</a>
+          </div>
+          <div class="tab-content">
+            <a href="#" class="tab-item">Deutsch als Fremdsprache</a>
+            <a href="#" class="tab-item">Wirtschaftsdeutsch</a>
+            <a href="#" class="tab-item">Wissenschaftsdeutsch</a>
+            <a href="#" class="tab-item">Fachdeutsch</a>
+          </div>
+          <div class="tab-content">
+            <a href="#" class="tab-item">Русский для бизнеса</a>
+            <a href="#" class="tab-item">Научный русский</a>
+            <a href="#" class="tab-item">Юридический русский</a>
+            <a href="#" class="tab-item">Технический русский</a>
+          </div>
+          <div class="tab-content">
+            <a href="#" class="tab-item">商务汉语</a>
+            <a href="#" class="tab-item">学术汉语</a>
+            <a href="#" class="tab-item">法律汉语</a>
+            <a href="#" class="tab-item">技术汉语</a>
+          </div>
+          <div class="tab-content">
+            <a href="#" class="tab-item">العربية التجارية</a>
+            <a href="#" class="tab-item">العربية الأكاديمية</a>
+            <a href="#" class="tab-item">العربية القانونية</a>
+            <a href="#" class="tab-item">العربية التقنية</a>
+          </div>
+          <div class="tab-content">
+            <a href="#" class="tab-item">Japanisch</a>
+            <a href="#" class="tab-item">Koreanisch</a>
+            <a href="#" class="tab-item">Portugiesisch</a>
+            <a href="#" class="tab-item">Niederländisch</a>
+          </div>
+        </div>
+
+        <!-- Spalte 4: Forschung & Entwicklung -->
+        <div class="column">
+          <div class="column-header">
+            <h3>Forschung & Entwicklung</h3>
+          </div>
+          <div class="tab-navigation">
+            <button class="tab-btn active" onclick="showTab(3, 0)">Projekte</button>
+            <button class="tab-btn" onclick="showTab(3, 1)">Publikationen</button>
+            <button class="tab-btn" onclick="showTab(3, 2)">Konferenzen</button>
+            <button class="tab-btn" onclick="showTab(3, 3)">Kooperationen</button>
+            <button class="tab-btn" onclick="showTab(3, 4)">Förderung</button>
+            <button class="tab-btn" onclick="showTab(3, 5)">Innovation</button>
+            <button class="tab-btn" onclick="showTab(3, 6)">Technologie</button>
+            <button class="tab-btn" onclick="showTab(3, 7)">Evaluation</button>
+            <button class="tab-btn" onclick="showTab(3, 8)">Transfer</button>
+          </div>
+          <div class="tab-content active">
+            <a href="#" class="tab-item">Aktuelle Forschungsprojekte</a>
+            <a href="#" class="tab-item">Abgeschlossene Projekte</a>
+            <a href="#" class="tab-item">Projektplanung</a>
+            <a href="#" class="tab-item">Projektmanagement</a>
+          </div>
+          <div class="tab-content">
+            <a href="#" class="tab-item">Wissenschaftliche Artikel</a>
+            <a href="#" class="tab-item">Monographien</a>
+            <a href="#" class="tab-item">Sammelbände</a>
+            <a href="#" class="tab-item">Rezensionen</a>
+          </div>
+          <div class="tab-content">
+            <a href="#" class="tab-item">Internationale Konferenzen</a>
+            <a href="#" class="tab-item">Workshops</a>
+            <a href="#" class="tab-item">Symposien</a>
+            <a href="#" class="tab-item">Tagungen</a>
+          </div>
+          <div class="tab-content">
+            <a href="#" class="tab-item">Universitätspartnerschaften</a>
+            <a href="#" class="tab-item">Industriekooperationen</a>
+            <a href="#" class="tab-item">Internationale Netzwerke</a>
+            <a href="#" class="tab-item">Austauschprogramme</a>
+          </div>
+          <div class="tab-content">
+            <a href="#" class="tab-item">EU-Förderung</a>
+            <a href="#" class="tab-item">Nationale Förderung</a>
+            <a href="#" class="tab-item">Stiftungsförderung</a>
+            <a href="#" class="tab-item">Drittmittel</a>
+          </div>
+          <div class="tab-content">
+            <a href="#" class="tab-item">Didaktische Innovationen</a>
+            <a href="#" class="tab-item">Methodische Entwicklungen</a>
+            <a href="#" class="tab-item">Neue Lernformen</a>
+            <a href="#" class="tab-item">Zukunftstrends</a>
+          </div>
+          <div class="tab-content">
+            <a href="#" class="tab-item">E-Learning Plattformen</a>
+            <a href="#" class="tab-item">Mobile Learning</a>
+            <a href="#" class="tab-item">Virtual Reality</a>
+            <a href="#" class="tab-item">KI im Sprachunterricht</a>
+          </div>
+          <div class="tab-content">
+            <a href="#" class="tab-item">Lerneffektivität</a>
+            <a href="#" class="tab-item">Qualitätsmessung</a>
+            <a href="#" class="tab-item">Feedback-Systeme</a>
+            <a href="#" class="tab-item">Continuous Improvement</a>
+          </div>
+          <div class="tab-content">
+            <a href="#" class="tab-item">Praxistransfer</a>
+            <a href="#" class="tab-item">Implementierung</a>
+            <a href="#" class="tab-item">Dissemination</a>
+            <a href="#" class="tab-item">Impact Measurement</a>
+          </div>
+        </div>
+
+        <!-- Spalte 5: Ressourcen & Services -->
+        <div class="column">
+          <div class="column-header">
+            <h3>Ressourcen & Services</h3>
+          </div>
+          <div class="tab-navigation">
+            <button class="tab-btn active" onclick="showTab(4, 0)">Bibliothek</button>
+            <button class="tab-btn" onclick="showTab(4, 1)">Tools</button>
+            <button class="tab-btn" onclick="showTab(4, 2)">Beratung</button>
+            <button class="tab-btn" onclick="showTab(4, 3)">Zertifikate</button>
+            <button class="tab-btn" onclick="showTab(4, 4)">Tests</button>
+            <button class="tab-btn" onclick="showTab(4, 5)">Materialien</button>
+            <button class="tab-btn" onclick="showTab(4, 6)">Support</button>
+            <button class="tab-btn" onclick="showTab(4, 7)">Community</button>
+            <button class="tab-btn" onclick="showTab(4, 8)">Kontakt</button>
+          </div>
+          <div class="tab-content active">
+            <a href="#" class="tab-item">Digitale Bibliothek</a>
+            <a href="#" class="tab-item">Fachzeitschriften</a>
+            <a href="#" class="tab-item">E-Books</a>
+            <a href="#" class="tab-item">Datenbanken</a>
+          </div>
+          <div class="tab-content">
+            <a href="#" class="tab-item">Lernplattformen</a>
+            <a href="#" class="tab-item">Sprachlabor</a>
+            <a href="#" class="tab-item">Übersetzungstools</a>
+            <a href="#" class="tab-item">Grammatiktrainer</a>
+          </div>
+          <div class="tab-content">
+            <a href="#" class="tab-item">Studienberatung</a>
+            <a href="#" class="tab-item">Laufbahnberatung</a>
+            <a href="#" class="tab-item">Methodische Beratung</a>
+            <a href="#" class="tab-item">Individuelle Betreuung</a>
+          </div>
+          <div class="tab-content">
+            <a href="#" class="tab-item">Sprachzertifikate</a>
+            <a href="#" class="tab-item">Fachzertifikate</a>
+            <a href="#" class="tab-item">Universitätszertifikate</a>
+            <a href="#" class="tab-item">Internationale Zertifikate</a>
+          </div>
+          <div class="tab-content">
+            <a href="#" class="tab-item">Einstufungstests</a>
+            <a href="#" class="tab-item">Fortschrittstests</a>
+            <a href="#" class="tab-item">Abschlusstests</a>
+            <a href="#" class="tab-item">Selbsttests</a>
+          </div>
+          <div class="tab-content">
+            <a href="#" class="tab-item">Lehrbücher</a>
+            <a href="#" class="tab-item">Arbeitsblätter</a>
+            <a href="#" class="tab-item">Multimedia-Inhalte</a>
+            <a href="#" class="tab-item">Open Educational Resources</a>
+          </div>
+          <div class="tab-content">
+            <a href="#" class="tab-item">Technischer Support</a>
+            <a href="#" class="tab-item">Didaktischer Support</a>
+            <a href="#" class="tab-item">IT-Helpdesk</a>
+            <a href="#" class="tab-item">FAQ & Anleitungen</a>
+          </div>
+          <div class="tab-content">
+            <a href="#" class="tab-item">Lerngruppen</a>
+            <a href="#" class="tab-item">Foren</a>
+            <a href="#" class="tab-item">Social Learning</a>
+            <a href="#" class="tab-item">Alumni-Netzwerk</a>
+          </div>
+          <div class="tab-content">
+            <a href="#" class="tab-item">Ansprechpartner</a>
+            <a href="#" class="tab-item">Öffnungszeiten</a>
+            <a href="#" class="tab-item">Standorte</a>
+            <a href="#" class="tab-item">Impressum</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Page Indicators -->
+    <div class="page-indicators">
+      <div class="indicator active" onclick="goToPage(0)"></div>
+      <div class="indicator" onclick="goToPage(1)"></div>
+      <div class="indicator" onclick="goToPage(2)"></div>
+      <div class="indicator" onclick="goToPage(3)"></div>
+      <div class="indicator" onclick="goToPage(4)"></div>
+    </div>
+
+    <!-- Swipe Hint -->
+    <div class="swipe-hint" id="swipeHint">
+      <div>👈 👉</div>
+      <div>Wischen zum Navigieren</div>
+    </div>
+  </main>
+
+  <script>
+    let currentPage = 0;
+    const totalPages = 5;
+    let startX = 0;
+    let currentX = 0;
+    let isDragging = false;
+    let hasInteracted = false;
+
+    const navWrapper = document.getElementById('navWrapper');
+    const indicators = document.querySelectorAll('.indicator');
+    const swipeHint = document.getElementById('swipeHint');
+
+    // Initialize
+    updateIndicators();
+    
+    // Hide swipe hint after 5 seconds or first interaction
+    setTimeout(() => {
+      if (!hasInteracted) {
+        swipeHint.style.opacity = '0';
+        setTimeout(() => swipeHint.style.display = 'none', 300);
+      }
+    }, 5000);
+
+    // Touch Events
+    navWrapper.addEventListener('touchstart', handleTouchStart, { passive: false });
+    navWrapper.addEventListener('touchmove', handleTouchMove, { passive: false });
+    navWrapper.addEventListener('touchend', handleTouchEnd, { passive: false });
+
+    // Mouse Events for desktop testing
+    navWrapper.addEventListener('mousedown', handleMouseDown);
+    navWrapper.addEventListener('mousemove', handleMouseMove);
+    navWrapper.addEventListener('mouseup', handleMouseEnd);
+    navWrapper.addEventListener('mouseleave', handleMouseEnd);
+
+    function handleTouchStart(e) {
+      startX = e.touches[0].clientX;
+      isDragging = true;
+      navWrapper.classList.add('dragging');
+      hideSwipeHint();
+    }
+
+    function handleTouchMove(e) {
+      if (!isDragging) return;
+      e.preventDefault();
+      
+      currentX = e.touches[0].clientX;
+      const deltaX = currentX - startX;
+      const currentTransform = -currentPage * 100;
+      const newTransform = currentTransform + (deltaX / window.innerWidth * 100);
+      
+      navWrapper.style.transform = `translateX(${newTransform}vw)`;
+    }
+
+    function handleTouchEnd(e) {
+      if (!isDragging) return;
+      
+      const deltaX = currentX - startX;
+      const threshold = window.innerWidth * 0.2; // 20% of screen width
+      
+      if (Math.abs(deltaX) > threshold) {
+        if (deltaX > 0 && currentPage > 0) {
+          currentPage--;
+        } else if (deltaX < 0 && currentPage < totalPages - 1) {
+          currentPage++;
+        }
+      }
+      
+      updatePage();
+      isDragging = false;
+      navWrapper.classList.remove('dragging');
+    }
+
+    function handleMouseDown(e) {
+      startX = e.clientX;
+      isDragging = true;
+      navWrapper.classList.add('dragging');
+      hideSwipeHint();
+      e.preventDefault();
+    }
+
+    function handleMouseMove(e) {
+      if (!isDragging) return;
+      
+      currentX = e.clientX;
+      const deltaX = currentX - startX;
+      const currentTransform = -currentPage * 100;
+      const newTransform = currentTransform + (deltaX / window.innerWidth * 100);
+      
+      navWrapper.style.transform = `translateX(${newTransform}vw)`;
+    }
+
+    function handleMouseEnd(e) {
+      if (!isDragging) return;
+      
+      const deltaX = currentX - startX;
+      const threshold = window.innerWidth * 0.2;
+      
+      if (Math.abs(deltaX) > threshold) {
+        if (deltaX > 0 && currentPage > 0) {
+          currentPage--;
+        } else if (deltaX < 0 && currentPage < totalPages - 1) {
+          currentPage++;
+        }
+      }
+      
+      updatePage();
+      isDragging = false;
+      navWrapper.classList.remove('dragging');
+    }
+
+    function goToPage(pageIndex) {
+      currentPage = pageIndex;
+      updatePage();
+      hideSwipeHint();
+    }
+
+    function updatePage() {
+      navWrapper.style.transform = `translateX(-${currentPage * 100}vw)`;
+      updateIndicators();
+    }
+
+    function updateIndicators() {
+      indicators.forEach((indicator, index) => {
+        indicator.classList.toggle('active', index === currentPage);
+      });
+    }
+
+    function hideSwipeHint() {
+      if (!hasInteracted) {
+        hasInteracted = true;
+        swipeHint.style.opacity = '0';
+        setTimeout(() => swipeHint.style.display = 'none', 300);
+      }
+    }
+
+    // Tab functionality
+    function showTab(columnIndex, tabIndex) {
+      const column = document.querySelectorAll('.column')[columnIndex];
+      const tabButtons = column.querySelectorAll('.tab-btn');
+      const tabContents = column.querySelectorAll('.tab-content');
+      
+      // Remove active class from all tabs and contents
+      tabButtons.forEach(btn => btn.classList.remove('active'));
+      tabContents.forEach(content => content.classList.remove('active'));
+      
+      // Add active class to selected tab and content
+      tabButtons[tabIndex].classList.add('active');
+      tabContents[tabIndex].classList.add('active');
+    }
+
+    // Keyboard navigation
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'ArrowLeft' && currentPage > 0) {
+        currentPage--;
+        updatePage();
+        hideSwipeHint();
+      } else if (e.key === 'ArrowRight' && currentPage < totalPages - 1) {
+        currentPage++;
+        updatePage();
+        hideSwipeHint();
+      }
+    });
+
+    // Prevent default touch behavior on the navigation
+    document.addEventListener('touchmove', function(e) {
+      if (e.target.closest('.nav-container')) {
+        e.preventDefault();
+      }
+    }, { passive: false });
+
+    // Add visual feedback for touch
+    document.querySelectorAll('.column').forEach(column => {
+      column.addEventListener('touchstart', function() {
+        this.classList.add('touching');
+      });
+      
+      column.addEventListener('touchend', function() {
+        this.classList.remove('touching');
+      });
+    });
+  </script>
+</body>
+</html>
