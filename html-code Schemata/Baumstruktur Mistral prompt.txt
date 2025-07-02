@@ -1,0 +1,3 @@
+Wandle das angehängte Begriffsschema in eine html-Quizseite um. Die Kästchen in der dritten Ebene werden leer ausgegeben. Auf einen Klickbutton wird dann der Inhalt angezeigt. 
+
+Um die Mind-Map-Struktur beizubehalten und die dritte Ebene interaktiv zu gestalten, können wir die HTML-Struktur so anpassen, dass die Kästchen der dritten Ebene zunächst leer sind und durch Klicken auf einen Button der Inhalt angezeigt wird. Hier ist ein Beispiel, wie das umgesetzt werden kann:

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<exercise>
+
+
+ createQuestion(quizContainer, 
+                "La DDHC ______ des dispositions.", 
+                "contient", 
+                ["contenait", "a contenu", "contint"]);
+createQuestion(quizContainer, 
+"qui ______.",
+"concernent",
+["ont concerné", "concernaient", "concernèrent"]);
+createQuestion(quizContainer, 
+"Le texte  ______ deux grands principes d’organisation politique: la souveraineté nationale et la séparation des pouvoirs.",
+"pose",
+["a mis", "posait", "met"]);
+
+
+La DDHC fait apparaître trois aspirations essentielles pour l’histoire des institutions politiques:
+<br/>
+	<br/>
+1. La <test wrong1="mise en place" wrong2="recherche" wrong3="démande">demande</test> d’une constitution: <br/>
+Pour qu’il y ait une constitution, la séparation des pouvoirs est indispensable : le pouvoir <test wrong1="devrait" wrong2="a dû" wrong3="devait">doit</test> arrêter le pouvoir.<br/>
+	<br/>
+2. L’encadrement de l’autorité: <br/>
+Le grand texte relatif à la question de la souveraineté est le Contrat Social (1762). Chaque individu <test wrong1="mettra" wrong2="a mis" wrong3="avait mis">met</test> en commun sa personne et toute sa puissance sous la suprême direction <test wrong1="du chef de l'Etat" wrong2="du Tiers Etat" wrong3="du peuple">de la volonté générale</test>. L’Etat doit être dirigé par la volonté générale et non par la volonté d’un seul. Désormais, la souveraineté <test wrong1="a été détenue" wrong2="avait été détenue" wrong3="est détenu">est détenue</test> par la nation.
+<br/>
+	<br/>
+3. L' <test wrong1="abolition" wrong2="application" wrong3="attention">établissement</test> de la loi:<br/>
+La volonté générale <test wrong1="s'est exprimée" wrong2="s'exprimera" wrong3="s'exprimait">s`exprime</test> dans la loi, c’est-à-dire dans un texte qui lui-même est <test wrong1="compréhensible" wrong2="logique" wrong3="strict">général</test> et <test wrong1="concret" wrong2="clair" wrong3="exhaustif">abstrait</test> et qui doit s’appliquer à tout le monde. La loi est le texte juridique fondamental dans la pensée des révolutionnaires. C’est elle qui est au coeur de la Déclaration des droits de l’homme et du citoyen.
+<br/>
+	<br/>
+Les idées de Jean-Jacques Rousseau <test wrong1="vont impressionner" wrong2="ont choqué" wrong3="avaient inspiré">ont inspiré</test> toute l’histoire constitutionnelle française au moins jusqu’en 1958. C’est en raison de celles-ci que la France a développé une conception absolue de la loi. La loi a quasiment été un mythe, absolument intouchable en France jusqu’en 1958. D'après le Contrat Social, elle <test wrong1="venait" wrong2="est venue" wrong3="viendra">vient</test> directement du peuple. La loi <test wrong1="a exprimé" wrong2="exprimera" wrong3="a appliqué">exprime</test> la volonté générale. Les différentes <test wrong1="dispositions" wrong2="lois" wrong3="directives">constitutions</test> ont été avant tout préoccupées par l’organisation du pouvoir <test wrong1="exécutif" wrong2="judiciaire" wrong3="de l'opposition">législatif</test>. Cependant, les révolutionnaires devaient résoudre un problème pratique: Comment exprimer la volonté générale, dans un Etat comme la France qui à l’époque compte plusieurs millions de citoyens, ? Ils <test wrong1="avaient adopté" wrong2="adoptaient" wrong3="adopteront">ont adopté</test> un système qui permet <test wrong1="la démocratie directe" wrong2="le suffrage universel" wrong3="le suffrage censitaire">la représentation</test>.
+
+<br/>
+	<br/>
+</exercise>

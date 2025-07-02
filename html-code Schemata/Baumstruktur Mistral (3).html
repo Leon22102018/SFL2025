@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mind-Map Quiz</title>
+    <style>
+        .mindmap {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }
+        .box {
+            border: 1px solid #000;
+            padding: 10px;
+            margin: 10px;
+            width: 200px;
+            text-align: center;
+            position: relative;
+        }
+        .hidden {
+            display: none;
+        }
+        .button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 5px 10px;
+            text-decoration: none;
+            cursor: pointer;
+            margin-top: 5px;
+            display: block;
+        }
+        .sub-box {
+            position: relative;
+            width: 200px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .vertical-sub-box {
+            position: relative;
+            width: 200px;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Le Président de la Ve République</h1>
+    <div class="mindmap">
+        <div class="box">le statut
+            <div class="sub-box">
+                <button class="button" onclick="showContent('statut1')">Anzeigen</button>
+                <div class="box hidden" id="statut1">le mode de désignation, art. 6+7
+                    <div class="vertical-sub-box">
+                        <button class="button" onclick="showContent('statut1a')">Anzeigen</button>
+                        <div class="box hidden" id="statut1a">Details zu le mode de désignation</div>
+                    </div>
+                </div>
+            </div>
+            <div class="sub-box">
+                <button class="button" onclick="showContent('statut2')">Anzeigen</button>
+                <div class="box hidden" id="statut2">la durée du mandat, art. 6
+                    <div class="vertical-sub-box">
+                        <button class="button" onclick="showContent('statut2a')">Anzeigen</button>
+                        <div class="box hidden" id="statut2a">Details zu la durée du mandat</div>
+                    </div>
+                </div>
+            </div>
+            <div class="sub-box">
+                <button class="button" onclick="showContent('statut3')">Anzeigen</button>
+                <div class="box hidden" id="statut3">l’irresponsabilité politique, art. 68</div>
+            </div>
+        </div>
+
+        <div class="box">la fonction
+            <div class="sub-box">
+                <button class="button" onclick="showContent('fonction1')">Anzeigen</button>
+                <div class="box hidden" id="fonction1">l’arbitrage, art. 5</div>
+            </div>
+        </div>
+
+        <div class="box">les attributions
+            <div class="sub-box">
+                <button class="button" onclick="showContent('attributions1')">Anzeigen</button>
+                <div class="box hidden" id="attributions1">les pouvoirs propres, art. 19</div>
+            </div>
+            <div class="sub-box">
+                <button class="button" onclick="showContent('attributions2')">Anzeigen</button>
+                <div class="box hidden" id="attributions2">les pouvoirs partagés, art. 19</div>
+            </div>
+        </div>
+
+        <div class="box">l’évolution de la fonction présidentielle
+            <div class="sub-box">
+                <button class="button" onclick="showContent('evolution1')">Anzeigen</button>
+                <div class="box hidden" id="evolution1">un arbitre</div>
+            </div>
+            <div class="sub-box">
+                <button class="button" onclick="showContent('evolution2')">Anzeigen</button>
+                <div class="box hidden" id="evolution2">un capitaine, le chef de la majorité présidentielle</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showContent(contentId) {
+            document.getElementById(contentId).classList.toggle('hidden');
+        }
+    </script>
+</body>
+</html>

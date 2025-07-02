@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz sur le droit français</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+        }
+        .instructions {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .question {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        select {
+            padding: 5px;
+            width: 100%;
+            margin-top: 5px;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        #results {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e8f4f8;
+            border-radius: 5px;
+            display: none;
+        }
+        .correct {
+            color: #27ae60;
+            font-weight: bold;
+        }
+        .incorrect {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+        .solution {
+            font-style: italic;
+            margin-top: 5px;
+        }
+        .verb-list {
+            background-color: #f0f0f0;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .scoreboard {
+            text-align: center;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        .tip {
+            font-style: italic;
+            color: #7f8c8d;
+            margin-top: 5px;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <h1>Quiz sur le droit français</h1>
+    
+    <div class="instructions">
+        <h3>Instructions:</h3>
+        <p>Faites des phrases en utilisant tous les verbes et les deux adjectifs proposés une seule fois :</p>
+        <div class="verb-list">
+            <strong>Verbes:</strong> régler, déterminer, régir, s'appliquer, réglementer, regrouper, comprendre, contenir les règles
+            <br>
+            <strong>Adjectifs:</strong> relatif à, applicable à
+        </div>
+        <p>Choisissez la phrase correcte pour chaque type de droit.</p>
+        <p class="tip"><strong>Astuce:</strong> Double-cliquez sur un menu déroulant pour effacer votre choix et sélectionner une autre réponse.</p>
+    </div>
+    
+    <div id="quiz">
+        <div class="question">
+            <p>1. Le droit constitutionnel ...</p>
+            <select id="q1">
+                <option value="">Choisissez une réponse</option>
+                <option value="règle">règle l'organisation et le fonctionnement des institutions politiques de l'Etat.</option>
+                <option value="déterminer">détermine les droits et les obligations du contribuable.</option>
+                <option value="régir">régit les rapports entre les Etats.</option>
+                <option value="s'applique">s'applique aux particuliers.</option>
+                <option value="réglementer">réglemente l'organisation et le fonctionnement des administrations publiques ainsi que les rapports entre ces administrations et les administrés.</option>
+                <option value="regroupe">regroupe l'ensemble des règles permettant de fixer les modes généraux d'incrimination des comportements anti-sociaux et les sanctions qui leurs sont applicables.</option>
+                <option value="comprend">comprend les règles relatives aux rapports entre les employeurs et les salariés.</option>
+                <option value="contient les règles">contient les règles relatives aux rapports entre particuliers de nationalité différente.</option>
+                <option value="relatif à">est relatif aux rapports entre les employeurs et les salariés.</option>
+                <option value="applicable à">est applicable aux commerçants.</option>
+            </select>
+            <div id="feedback1" class="feedback"></div>
+        </div>
+        
+        <div class="question">
+            <p>2. Le droit administratif ...</p>
+            <select id="q2">
+                <option value="">Choisissez une réponse</option>
+                <option value="règle">règle l'organisation et le fonctionnement des institutions politiques de l'Etat.</option>
+                <option value="déterminer">détermine les droits et les obligations du contribuable.</option>
+                <option value="régir">régit les rapports entre les Etats.</option>
+                <option value="s'applique">s'applique aux particuliers.</option>
+                <option value="réglemente">réglemente l'organisation et le fonctionnement des administrations publiques ainsi que les rapports entre ces administrations et les administrés.</option>
+                <option value="regroupe">regroupe l'ensemble des règles permettant de fixer les modes généraux d'incrimination des comportements anti-sociaux et les sanctions qui leurs sont applicables.</option>
+                <option value="comprend">comprend les règles relatives aux rapports entre les employeurs et les salariés.</option>
+                <option value="contient les règles">contient les règles relatives aux rapports entre particuliers de nationalité différente.</option>
+                <option value="relatif à">est relatif aux rapports entre les employeurs et les salariés.</option>
+                <option value="applicable à">est applicable aux commerçants.</option>
+            </select>
+            <div id="feedback2" class="feedback"></div>
+        </div>
+        
+        <div class="question">
+            <p>3. Le droit fiscal ...</p>
+            <select id="q3">
+                <option value="">Choisissez une réponse</option>
+                <option value="règle">règle l'organisation et le fonctionnement des institutions politiques de l'Etat.</option>
+                <option value="détermine">détermine les droits et les obligations du contribuable.</option>
+                <option value="régir">régit les rapports entre les Etats.</option>
+                <option value="s'applique">s'applique aux particuliers.</option>
+                <option value="réglemente">réglemente l'organisation et le fonctionnement des administrations publiques ainsi que les rapports entre ces administrations et les administrés.</option>
+                <option value="regroupe">regroupe l'ensemble des règles permettant de fixer les modes généraux d'incrimination des comportements anti-sociaux et les sanctions qui leurs sont applicables.</option>
+                <option value="comprend">comprend les règles relatives aux rapports entre les employeurs et les salariés.</option>
+                <option value="contient les règles">contient les règles relatives aux rapports entre particuliers de nationalité différente.</option>
+                <option value="relatif à">est relatif aux rapports entre les employeurs et les salariés.</option>
+                <option value="applicable à">est applicable aux commerçants.</option>
+            </select>
+            <div id="feedback3" class="feedback"></div>
+        </div>
+        
+        <div class="question">
+            <p>4. Le droit pénal ...</p>
+            <select id="q4">
+                <option value="">Choisissez une réponse</option>
+                <option value="règle">règle l'organisation et le fonctionnement des institutions politiques de l'Etat.</option>
+                <option value="détermine">détermine les droits et les obligations du contribuable.</option>
+                <option value="régir">régit les rapports entre les Etats.</option>
+                <option value="s'applique">s'applique aux particuliers.</option>
+                <option value="réglemente">réglemente l'organisation et le fonctionnement des administrations publiques ainsi que les rapports entre ces administrations et les administrés.</option>
+                <option value="regroupe">regroupe l'ensemble des règles permettant de fixer les modes généraux d'incrimination des comportements anti-sociaux et les sanctions qui leurs sont applicables.</option>
+                <option value="comprend">comprend les règles relatives aux rapports entre les employeurs et les salariés.</option>
+                <option value="contient les règles">contient les règles relatives aux rapports entre particuliers de nationalité différente.</option>
+                <option value="relatif à">est relatif aux rapports entre les employeurs et les salariés.</option>
+                <option value="applicable à">est applicable aux commerçants.</option>
+            </select>
+            <div id="feedback4" class="feedback"></div>
+        </div>
+        
+        <div class="question">
+            <p>5. Le droit civil ...</p>
+            <select id="q5">
+                <option value="">Choisissez une réponse</option>
+                <option value="règle">règle l'organisation et le fonctionnement des institutions politiques de l'Etat.</option>
+                <option value="détermine">détermine les droits et les obligations du contribuable.</option>
+                <option value="régir">régit les rapports entre les Etats.</option>
+                <option value="s'applique">s'applique aux particuliers.</option>
+                <option value="réglemente">réglemente l'organisation et le fonctionnement des administrations publiques ainsi que les rapports entre ces administrations et les administrés.</option>
+                <option value="regroupe">regroupe l'ensemble des règles permettant de fixer les modes généraux d'incrimination des comportements anti-sociaux et les sanctions qui leurs sont applicables.</option>
+                <option value="comprend">comprend les règles relatives aux rapports entre les employeurs et les salariés.</option>
+                <option value="contient les règles">contient les règles relatives aux rapports entre particuliers de nationalité différente.</option>
+                <option value="relatif à">est relatif aux rapports entre les employeurs et les salariés.</option>
+                <option value="applicable à">est applicable aux commerçants.</option>
+            </select>
+            <div id="feedback5" class="feedback"></div>
+        </div>
+        
+        <div class="question">
+            <p>6. Le droit international public ...</p>
+            <select id="q6">
+                <option value="">Choisissez une réponse</option>
+                <option value="règle">règle l'organisation et le fonctionnement des institutions politiques de l'Etat.</option>
+                <option value="détermine">détermine les droits et les obligations du contribuable.</option>
+                <option value="régit">régit les rapports entre les Etats.</option>
+                <option value="s'applique">s'applique aux particuliers.</option>
+                <option value="réglemente">réglemente l'organisation et le fonctionnement des administrations publiques ainsi que les rapports entre ces administrations et les administrés.</option>
+                <option value="regroupe">regroupe l'ensemble des règles permettant de fixer les modes généraux d'incrimination des comportements anti-sociaux et les sanctions qui leurs sont applicables.</option>
+                <option value="comprend">comprend les règles relatives aux rapports entre les employeurs et les salariés.</option>
+                <option value="contient les règles">contient les règles relatives aux rapports entre particuliers de nationalité différente.</option>
+                <option value="relatif à">est relatif aux rapports entre les employeurs et les salariés.</option>
+                <option value="applicable à">est applicable aux commerçants.</option>
+            </select>
+            <div id="feedback6" class="feedback"></div>
+        </div>
+        
+        <div class="question">
+            <p>7. Le droit commercial ...</p>
+            <select id="q7">
+                <option value="">Choisissez une réponse</option>
+                <option value="règle">règle l'organisation et le fonctionnement des institutions politiques de l'Etat.</option>
+                <option value="détermine">détermine les droits et les obligations du contribuable.</option>
+                <option value="régit">régit les rapports entre les Etats.</option>
+                <option value="s'applique">s'applique aux particuliers.</option>
+                <option value="réglemente">réglemente l'organisation et le fonctionnement des administrations publiques ainsi que les rapports entre ces administrations et les administrés.</option>
+                <option value="regroupe">regroupe l'ensemble des règles permettant de fixer les modes généraux d'incrimination des comportements anti-sociaux et les sanctions qui leurs sont applicables.</option>
+                <option value="comprend">comprend les règles relatives aux rapports entre les employeurs et les salariés.</option>
+                <option value="contient les règles">contient les règles relatives aux rapports entre particuliers de nationalité différente.</option>
+                <option value="relatif à">est relatif aux rapports entre les employeurs et les salariés.</option>
+                <option value="applicable à">est applicable aux commerçants.</option>
+            </select>
+            <div id="feedback7" class="feedback"></div>
+        </div>
+        
+        <div class="question">
+            <p>8. Le droit du travail ...</p>
+            <select id="q8">
+                <option value="">Choisissez une réponse</option>
+                <option value="règle">règle l'organisation et le fonctionnement des institutions politiques de l'Etat.</option>
+                <option value="détermine">détermine les droits et les obligations du contribuable.</option>
+                <option value="régit">régit les rapports entre les Etats.</option>
+                <option value="s'applique">s'applique aux particuliers.</option>
+                <option value="réglemente">réglemente l'organisation et le fonctionnement des administrations publiques ainsi que les rapports entre ces administrations et les administrés.</option>
+                <option value="regroupe">regroupe l'ensemble des règles permettant de fixer les modes généraux d'incrimination des comportements anti-sociaux et les sanctions qui leurs sont applicables.</option>
+                <option value="comprend">comprend les règles relatives aux rapports entre les employeurs et les salariés.</option>
+                <option value="contient les règles">contient les règles relatives aux rapports entre particuliers de nationalité différente.</option>
+                <option value="relatif à">est relatif aux rapports entre les employeurs et les salariés.</option>
+                <option value="applicable à">est applicable aux commerçants.</option>
+            </select>
+            <div id="feedback8" class="feedback"></div>
+        </div>
+        
+        <div class="question">
+            <p>9. Le droit international privé ...</p>
+            <select id="q9">
+                <option value="">Choisissez une réponse</option>
+                <option value="règle">règle l'organisation et le fonctionnement des institutions politiques de l'Etat.</option>
+                <option value="détermine">détermine les droits et les obligations du contribuable.</option>
+                <option value="régit">régit les rapports entre les Etats.</option>
+                <option value="s'applique">s'applique aux particuliers.</option>
+                <option value="réglemente">réglemente l'organisation et le fonctionnement des administrations publiques ainsi que les rapports entre ces administrations et les administrés.</option>
+                <option value="regroupe">regroupe l'ensemble des règles permettant de fixer les modes généraux d'incrimination des comportements anti-sociaux et les sanctions qui leurs sont applicables.</option>
+                <option value="comprend">comprend les règles relatives aux rapports entre les employeurs et les salariés.</option>
+                <option value="contient les règles">contient les règles relatives aux rapports entre particuliers de nationalité différente.</option>
+                <option value="relatif à">est relatif aux rapports entre les employeurs et les salariés.</option>
+                <option value="applicable à">est applicable aux commerçants.</option>
+            </select>
+            <div id="feedback9" class="feedback"></div>
+        </div>
+        
+        <button id="submit-btn">Vérifier mes réponses</button>
+        <button id="reset-btn" style="display:none; background-color: #95a5a6;">Réessayer</button>
+    </div>
+    
+    <div id="results">
+        <div class="scoreboard">
+            <h3>Résultat: <span id="score">0</span>/9 correct</h3>
+        </div>
+        <div id="solutions"></div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const correctAnswers = {
+                'q1': 'règle',
+                'q2': 'réglemente',
+                'q3': 'détermine',
+                'q4': 'regroupe',
+                'q5': 's\'applique',
+                'q6': 'régit',
+                'q7': 'applicable à',
+                'q8': 'comprend',
+                'q9': 'contient les règles'
+            };
+            
+            const fullSolutions = {
+                'q1': 'Le droit constitutionnel règle l\'organisation et le fonctionnement des institutions politiques de l\'Etat.',
+                'q2': 'Le droit administratif réglemente l\'organisation et le fonctionnement des administrations publiques ainsi que les rapports entre ces administrations et les administrés.',
+                'q3': 'Le droit fiscal détermine les droits et les obligations du contribuable.',
+                'q4': 'Le droit pénal regroupe l\'ensemble des règles permettant de fixer les modes généraux d\'incrimination des comportements anti-sociaux et les sanctions qui leurs sont applicables.',
+                'q5': 'Le droit civil s\'applique aux particuliers.',
+                'q6': 'Le droit international public régit les rapports entre les Etats.',
+                'q7': 'Le droit commercial est applicable aux commerçants.',
+                'q8': 'Le droit du travail comprend les règles relatives aux rapports entre les employeurs et les salariés.',
+                'q9': 'Le droit international privé contient les règles relatives aux rapports entre particuliers de nationalité différente.'
+            };
+            
+            // Used phrases tracking
+            let usedChoices = new Set();
+            
+            // Add double-click functionality to reset selection
+            document.querySelectorAll('select').forEach(select => {
+                select.addEventListener('dblclick', function() {
+                    // Remember current value before resetting
+                    const previousValue = this.value;
+                    
+                    // Reset to empty option
+                    this.value = '';
+                    
+                    // Clear feedback for this question
+                    const questionNumber = this.id.substring(1);
+                    document.getElementById('feedback' + questionNumber).innerHTML = '';
+                    
+                    // Update disabled states for all dropdowns
+                    if (previousValue) {
+                        // Rebuild usedChoices set from all current selections
+                        usedChoices = new Set();
+                        updateDisabledOptions();
+                    }
+                });
+            });
+            
+            // Check if a choice is already used in another question
+            function updateDisabledOptions() {
+                const selects = document.querySelectorAll('select');
+                
+                // First collect all selected values
+                selects.forEach(select => {
+                    const selectedValue = select.value;
+                    if (selectedValue) {
+                        usedChoices.add(selectedValue);
+                    }
+                });
+                
+                // Then disable options in all selects
+                selects.forEach(select => {
+                    Array.from(select.options).forEach(option => {
+                        if (option.value && usedChoices.has(option.value) && option.value !== select.value) {
+                            option.disabled = true;
+                        } else {
+                            option.disabled = false;
+                        }
+                    });
+                });
+            }
+            
+            // Add change event listeners to all selects
+            document.querySelectorAll('select').forEach(select => {
+                select.addEventListener('change', function() {
+                    usedChoices = new Set();
+                    updateDisabledOptions();
+                });
+            });
+            
+            document.getElementById('submit-btn').addEventListener('click', function() {
+                let score = 0;
+                let allAnswered = true;
+                let solutionsHtml = '';
+                
+                for (let i = 1; i <= 9; i++) {
+                    const questionId = 'q' + i;
+                    const userAnswer = document.getElementById(questionId).value;
+                    const feedbackElement = document.getElementById('feedback' + i);
+                    
+                    if (!userAnswer) {
+                        feedbackElement.innerHTML = '<span class="incorrect">Veuillez choisir une réponse</span>';
+                        allAnswered = false;
+                        continue;
+                    }
+                    
+                    if (userAnswer === correctAnswers[questionId]) {
+                        feedbackElement.innerHTML = '<span class="correct">Correct!</span>';
+                        score++;
+                    } else {
+                        feedbackElement.innerHTML = '<span class="incorrect">Incorrect</span>';
+                    }
+                    
+                    solutionsHtml += `<p><strong>Question ${i}:</strong> ${fullSolutions[questionId]}</p>`;
+                }
+                
+                if (allAnswered) {
+                    document.getElementById('score').textContent = score;
+                    document.getElementById('solutions').innerHTML = solutionsHtml;
+                    document.getElementById('results').style.display = 'block';
+                    document.getElementById('submit-btn').style.display = 'none';
+                    document.getElementById('reset-btn').style.display = 'inline-block';
+                    
+                    // Disable all select inputs
+                    document.querySelectorAll('select').forEach(select => {
+                        select.disabled = true;
+                    });
+                }
+            });
+            
+            document.getElementById('reset-btn').addEventListener('click', function() {
+                // Reset all selects
+                document.querySelectorAll('select').forEach(select => {
+                    select.value = '';
+                    select.disabled = false;
+                });
+                
+                // Clear feedback
+                document.querySelectorAll('.feedback').forEach(element => {
+                    element.innerHTML = '';
+                });
+                
+                // Hide results
+                document.getElementById('results').style.display = 'none';
+                document.getElementById('submit-btn').style.display = 'inline-block';
+                document.getElementById('reset-btn').style.display = 'none';
+                
+                // Reset usedChoices
+                usedChoices = new Set();
+            });
+        });
+    </script>
+</body>
+</html>
