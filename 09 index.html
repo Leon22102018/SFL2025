@@ -93,12 +93,20 @@
       background: #f8f9fa;
       border-bottom: 2px solid #e2e8f0;
       overflow-x: auto;
-      scrollbar-width: none;
-      -ms-overflow-style: none;
+      scrollbar-width: thin;
+      -ms-overflow-style: auto;
+      width: 100%;
+      min-width: 0;
     }
     
     .tab-navigation::-webkit-scrollbar {
-      display: none;
+      height: 6px;
+      background: #e2e8f0;
+    }
+    
+    .tab-navigation::-webkit-scrollbar-thumb {
+      background: #cbd5e0;
+      border-radius: 3px;
     }
     
     .tab-btn {
@@ -266,7 +274,7 @@
           </div>
           <div class="tab-navigation">
             <button class="tab-btn active" onclick="showTab(0, 0)">SFL</button>
-            <button class="tab-btn" onclick="showTab(0, 1)">Brückenkurs-pré-stage</button>
+            <button class="tab-btn" onclick="showTab(0, 1)">Brückenkurs</button>
             <button class="tab-btn" onclick="showTab(0, 2)">Introduction</button>
             <button class="tab-btn" onclick="showTab(0, 3)">Histoire du Droit</button>
             <button class="tab-btn" onclick="showTab(0, 4)">Droit constitutionnel</button>
